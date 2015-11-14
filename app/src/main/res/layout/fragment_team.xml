@@ -30,7 +30,6 @@
         android:layout_height="wrap_content"
         android:text="@string/team_button"
         android:layout_gravity="center_horizontal"
-        android:clickable="false"
         android:gravity="center"/>
 
 

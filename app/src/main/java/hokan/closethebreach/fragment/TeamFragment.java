@@ -71,6 +71,7 @@ public class TeamFragment extends Fragment {
         });
 
         start = (Button) v.findViewById(R.id.team_button);
+        start.setClickable(false);
         start.setTypeface(font);
 
         return v;
