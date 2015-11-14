@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <integer name="hero_1_armor">15</integer>
+    <integer name="hero_1_hp">8</integer>
+    <integer name="hero_1_speed">6</integer>
+    <integer name="hero_1_respawn">4</integer>
+
+    <integer name="hero_2_armor">17</integer>
+    <integer name="hero_2_hp">10</integer>
+    <integer name="hero_2_speed">5</integer>
+    <integer name="hero_2_respawn">5</integer>
+
+    <integer name="hero_3_armor">16</integer>
+    <integer name="hero_3_hp">10</integer>
+    <integer name="hero_3_speed">5</integer>
+    <integer name="hero_3_respawn">5</integer>
+
+    <integer name="hero_4_armor">15</integer>
+    <integer name="hero_4_hp">6</integer>
+    <integer name="hero_4_speed">6</integer>
+    <integer name="hero_4_respawn">3</integer>
+
+    <integer name="hero_5_armor">16</integer>
+    <integer name="hero_5_hp">8</integer>
+    <integer name="hero_5_speed">7</integer>
+    <integer name="hero_5_respawn">4</integer>
+
+    <integer name="hero_6_armor">14</integer>
+    <integer name="hero_6_hp">6</integer>
+    <integer name="hero_6_speed">6</integer>
+    <integer name="hero_6_respawn">3</integer>
+
+    <integer name="hero_7_armor">14</integer>
+    <integer name="hero_7_hp">6</integer>
+    <integer name="hero_7_speed">6</integer>
+    <integer name="hero_7_respawn">3</integer>
+
+    <integer name="hero_8_armor">16</integer>
+    <integer name="hero_8_hp">8</integer>
+    <integer name="hero_8_speed">6</integer>
+    <integer name="hero_8_respawn">4</integer>
+
+    <integer name="hero_9_armor">14</integer>
+    <integer name="hero_9_hp">8</integer>
+    <integer name="hero_9_speed">6</integer>
+    <integer name="hero_9_respawn">4</integer>
+
+    <integer name="hero_10_armor">17</integer>
+    <integer name="hero_10_hp">8</integer>
+    <integer name="hero_10_speed">6</integer>
+    <integer name="hero_10_respawn">4</integer>
+
+    <integer name="hero_11_armor">17</integer>
+    <integer name="hero_11_hp">10</integer>
+    <integer name="hero_11_speed">5</integer>
+    <integer name="hero_11_respawn">5</integer>
+
+    <integer name="hero_12_armor">14</integer>
+    <integer name="hero_12_hp">8</integer>
+    <integer name="hero_12_speed">6</integer>
+    <integer name="hero_12_respawn">4</integer>
+
+    <integer name="hero_13_armor">14</integer>
+    <integer name="hero_13_hp">8</integer>
+    <integer name="hero_13_speed">6</integer>
+    <integer name="hero_13_respawn">4</integer>
+
+    <integer name="hero_14_armor">16</integer>
+    <integer name="hero_14_hp">8</integer>
+    <integer name="hero_14_speed">5</integer>
+    <integer name="hero_14_respawn">4</integer>
+
+    <integer name="hero_15_armor">17</integer>
+    <integer name="hero_15_hp">8</integer>
+    <integer name="hero_15_speed">5</integer>
+    <integer name="hero_15_respawn">4</integer>
+
+    <integer name="hero_16_armor">12</integer>
+    <integer name="hero_16_hp">12</integer>
+    <integer name="hero_16_speed">7</integer>
+    <integer name="hero_16_respawn">6</integer>
+
+    <integer name="hero_17_armor">15</integer>
+    <integer name="hero_17_hp">8</integer>
+    <integer name="hero_17_speed">6</integer>
+    <integer name="hero_17_respawn">4</integer>
+
+    <integer name="hero_18_armor">14</integer>
+    <integer name="hero_18_hp">8</integer>
+    <integer name="hero_18_speed">6</integer>
+    <integer name="hero_18_respawn">4</integer>
+
+
+
+</resources>

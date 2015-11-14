@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">Close the Breach</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="button_play">Play</string>
+    <string name="button_option">Options</string>
+    <string name="button_quit">Quit</string>
+
+    <string name="button_new">New game</string>
+    <string name="button_load">Load game</string>
+
+    <string name="quit_alert_dialog_title">Quit</string>
+    <string name="quit_alert_dialog_message">Do you really want to quit ?</string>
+
+    <string name="team_button">Start game</string>
+    <string name="team_title">Choose your characters</string>
+    <string name="team_character_number">Character </string>
+
+    <string name="hero_1">Alissa</string>
+    <string name="hero_2">Arjhan</string>
+    <string name="hero_3">Bruenor</string>
+    <string name="hero_4">Catti-Brie</string>
+    <string name="hero_5">Drizzt</string>
+    <string name="hero_6">Heskan</string>
+    <string name="hero_7">Immeril</string>
+    <string name="hero_8">Jarlaxle</string>
+    <string name="hero_9">Kat</string>
+    <string name="hero_10">Keyleth</string>
+    <string name="hero_11">Quinn</string>
+    <string name="hero_12">Regis</string>
+    <string name="hero_13">Tarak</string>
+    <string name="hero_14">Thorgrim</string>
+    <string name="hero_15">Vistra</string>
+    <string name="hero_16">Wulfgar</string>
+    <string name="hero_17">Artemis</string>
+    <string name="hero_18">Athrogate</string>
+
+</resources>
