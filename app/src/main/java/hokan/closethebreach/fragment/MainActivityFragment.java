@@ -14,11 +14,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-
 import hokan.closethebreach.GameApplication;
 import hokan.closethebreach.R;
-import hokan.closethebreach.creatures.Hero;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -51,6 +48,11 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+    }
+
+    @Override
     public void onClick(View v) {
 
         final Activity activity = getActivity();
@@ -66,9 +68,6 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
                 transaction.commit();
                 break;
             case R.id.button_option :
-                ArrayList<Hero> heroes = GameApplication.getApplication().getHeroes();
-                for (Hero h : heroes)
-                    h.setEnable(true);
                 Toast.makeText(activity, R.string.button_option, Toast.LENGTH_SHORT).show();
                 break;
             case R.id.button_quit :

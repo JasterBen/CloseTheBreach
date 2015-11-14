@@ -58,6 +58,8 @@ public class TeamAdapter extends BaseAdapter {
         character_number.setTypeface(font);
         ImageView character_image = (ImageView) character.findViewById(R.id.character_image);
         character_image.setImageResource(R.drawable.shield);
+        TextView character_name = (TextView) character.findViewById(R.id.character_name_textview);
+        character_name.setTypeface(font);
 
         return character;
     }
