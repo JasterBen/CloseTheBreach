@@ -57,36 +57,35 @@ public class CharactersFragment extends DialogFragment implements AdapterView.On
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        onItemSelected(false, view, position);
+        onItemSelected(false, position);
     }
 
 
-    private void notifyToTarget(int code, int image, String name)
+    private void notifyToTarget(int code, int pos)
     {
         Fragment target = getTargetFragment();
         if (target != null)
         {
             Intent intent = new Intent();
-            intent.putExtra(TeamFragment.IMAGE, image);
-            intent.putExtra(TeamFragment.NAME, name);
+            intent.putExtra(POSITION, pos);
             target.onActivityResult(getTargetRequestCode(), code, intent);
         }
     }
 
     @Override
     public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-        onItemSelected(true, view, position);
+        onItemSelected(true, position);
         return true;
     }
 
 
-    public void onItemSelected(boolean isLong, View view, int position)
+    public void onItemSelected(boolean isLong, int position)
     {
         Hero hero = imageAdapter.getItem(position);
         if (!isLong)
         {
             hero.setEnable(false);
-            notifyToTarget(Activity.RESULT_OK, hero.getImage(), hero.getName());
+            notifyToTarget(Activity.RESULT_OK, position);
             CharactersFragment.this.dismiss();
         }
         else

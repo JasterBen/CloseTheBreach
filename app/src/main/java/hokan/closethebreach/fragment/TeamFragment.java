@@ -80,8 +80,15 @@ public class TeamFragment extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        int image = data.getIntExtra(IMAGE, R.drawable.shield);
-        String name = data.getStringExtra(NAME);
+        int pos = data.getIntExtra(CharactersFragment.POSITION, -1);
+        int image = R.drawable.shield;
+        String name = null;
+        if (pos != -1)
+        {
+            Hero hero = GameApplication.getApplication().getHeroes().get(pos);
+            image = hero.getImage();
+            name = hero.getName();
+        }
         ImageView imageView = (ImageView) selectedView.findViewById(R.id.character_image);
         TextView nameView = (TextView) selectedView.findViewById(R.id.character_name_textview);
         imageView.setImageResource(image);
