@@ -14,14 +14,9 @@ import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
-import java.util.ArrayList;
-
 import hokan.closethebreach.R;
 import hokan.closethebreach.adapter.ImageAdapter;
 import hokan.closethebreach.creatures.Hero;
-import hokan.closethebreach.utils.Attack;
-import hokan.closethebreach.utils.Job;
-import hokan.closethebreach.utils.Power;
 
 /**
  * Created by Utilisateur on 14/11/2015.
@@ -97,22 +92,21 @@ public class CharactersFragment extends DialogFragment implements AdapterView.On
         else
         {
             //String prout = "prout";
-            ArrayList<Power> powers = new ArrayList<>();
-            powers.add(new Power("Attaque prudente"));
-            powers.add(new Power("Tir de chasseur", new Attack(6, 1)));
-            powers.add(new Power("Double tir"));
-            powers.add(new Power("Course d'attaque"));
-            powers.add(new Power("Aide cruciale"));
-            powers.add(new Power("Saut d'attaque"));
-            hero.setJob(new Job("Ranger humain", powers));
-            Job job = hero.getJob();
+//            ArrayList<Power> powers = new ArrayList<>();
+//            powers.add(new Power("Attaque prudente"));
+//            powers.add(new Power("Tir de chasseur", new Attack(6, 1)));
+//            powers.add(new Power("Double tir"));
+//            powers.add(new Power("Course d'attaque"));
+//            powers.add(new Power("Aide cruciale"));
+//            powers.add(new Power("Saut d'attaque"));
+//            hero.setJob(new Job("Ranger humain", powers));
+//            Job job = hero.getJob();
 //            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 //            builder.setIcon(hero.getImage());
 //            builder.setTitle(hero.getName() + " - " + job.getName());
 //            builder.setAdapter(new DialogAdapter(getActivity(), job.getPowers()), null);
 //            builder.setPositiveButton(android.R.string.ok, null);
 //            builder.create().show();
-
 
             Bundle bundle = new Bundle();
             bundle.putInt(POSITION, position);

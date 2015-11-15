@@ -23,7 +23,7 @@ public class DialogAdapter extends BaseAdapter {
     public DialogAdapter(Context c, ArrayList<Power> powers) {
         context = c;
         this.powers = powers;
-        powersSize = powers.size();
+        powersSize = powers == null ? 0 : powers.size();
     }
 
     @Override

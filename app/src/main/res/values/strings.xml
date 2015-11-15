@@ -36,6 +36,25 @@
     <string name="hero_17">Artemis</string>
     <string name="hero_18">Athrogate</string>
 
+    <string name="job_1">Ranger humaine</string>
+    <string name="job_2">Guerrier drakéïde</string>
+    <string name="job_3">Assassin humain</string>
+    <string name="job_4">Guerroyeur nain</string>
+    <string name="job_5">Guerrier nain</string>
+    <string name="job_6">Archère humaine</string>
+    <string name="job_7">Rôdeur drow</string>
+    <string name="job_8">Magicien drakéïde</string>
+    <string name="job_9">Magicien eladrain</string>
+    <string name="job_10">Bretteur drow</string>
+    <string name="job_11">Voleuse humaine</string>
+    <string name="job_12">Paladin elfe</string>
+    <string name="job_13">Clerc humain</string>
+    <string name="job_14">Roublard halfelin</string>
+    <string name="job_15">Roublard demi-orc</string>
+    <string name="job_16">Clerc nain</string>
+    <string name="job_17">Guerrière naine</string>
+    <string name="job_18">Barbare humain</string>
+
     <string name="armor">CA</string>
     <string name="hp">PV</string>
     <string name="speed">Vitesse</string>
