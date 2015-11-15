@@ -6,20 +6,27 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
+import java.util.ArrayList;
+
 import hokan.closethebreach.R;
 import hokan.closethebreach.adapter.ImageAdapter;
 import hokan.closethebreach.creatures.Hero;
+import hokan.closethebreach.utils.Job;
+import hokan.closethebreach.utils.Power;
 
 /**
  * Created by Utilisateur on 14/11/2015.
  */
-public class CharactersFragment extends DialogFragment implements AdapterView.OnItemClickListener {
+public class CharactersFragment extends DialogFragment implements AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
+
+    public static final String POSITION = "position";
 
     protected ImageAdapter imageAdapter;
     protected GridView gridView;
@@ -34,17 +41,9 @@ public class CharactersFragment extends DialogFragment implements AdapterView.On
         imageAdapter = new ImageAdapter(getActivity());
         gridView.setAdapter(imageAdapter);
         gridView.setOnItemClickListener(this);
+        gridView.setOnItemLongClickListener(this);
 
         return v;
-    }
-
-
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Hero hero = imageAdapter.getItem(position);
-        hero.setEnable(false);
-        notifyToTarget(Activity.RESULT_OK, hero.getImage(), hero.getName());
-        CharactersFragment.this.dismiss();
     }
 
     @Override
@@ -56,6 +55,13 @@ public class CharactersFragment extends DialogFragment implements AdapterView.On
         getDialog().getWindow().setAttributes((android.view.WindowManager.LayoutParams) params);
     }
 
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        onItemSelected(false, view, position);
+    }
+
+
     private void notifyToTarget(int code, int image, String name)
     {
         Fragment target = getTargetFragment();
@@ -65,6 +71,51 @@ public class CharactersFragment extends DialogFragment implements AdapterView.On
             intent.putExtra(TeamFragment.IMAGE, image);
             intent.putExtra(TeamFragment.NAME, name);
             target.onActivityResult(getTargetRequestCode(), code, intent);
+        }
+    }
+
+    @Override
+    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+        onItemSelected(true, view, position);
+        return true;
+    }
+
+
+    public void onItemSelected(boolean isLong, View view, int position)
+    {
+        Hero hero = imageAdapter.getItem(position);
+        if (!isLong)
+        {
+            hero.setEnable(false);
+            notifyToTarget(Activity.RESULT_OK, hero.getImage(), hero.getName());
+            CharactersFragment.this.dismiss();
+        }
+        else
+        {
+            //String prout = "prout";
+            ArrayList<Power> powers = new ArrayList<>();
+            powers.add(new Power("Attaque prudente"));
+            powers.add(new Power("Tir de chasseur"));
+            powers.add(new Power("Double tir"));
+            powers.add(new Power("Course d'attaque"));
+            powers.add(new Power("Aide cruciale"));
+            powers.add(new Power("Saut d'attaque"));
+            hero.setJob(new Job("Ranger humain", powers));
+            Job job = hero.getJob();
+//            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+//            builder.setIcon(hero.getImage());
+//            builder.setTitle(hero.getName() + " - " + job.getName());
+//            builder.setAdapter(new DialogAdapter(getActivity(), job.getPowers()), null);
+//            builder.setPositiveButton(android.R.string.ok, null);
+//            builder.create().show();
+
+
+            Bundle bundle = new Bundle();
+            bundle.putInt(POSITION, position);
+            FragmentManager manager = getFragmentManager();
+            CharacterDescriptionFragment dialog = new CharacterDescriptionFragment();
+            dialog.setArguments(bundle);
+            dialog.show(manager, "dialog");
         }
     }
 }

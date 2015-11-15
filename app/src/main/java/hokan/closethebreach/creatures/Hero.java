@@ -3,7 +3,6 @@ package hokan.closethebreach.creatures;
 import java.util.ArrayList;
 
 import hokan.closethebreach.utils.Job;
-import hokan.closethebreach.utils.Power;
 
 /**
  * Created by Utilisateur on 14/11/2015.
@@ -17,7 +16,7 @@ public class Hero {
     protected int vitesse;
     protected int respawn;
     protected ArrayList<Monster> monsters;
-    protected ArrayList<Power> powers;
+    //protected ArrayList<Power> powers;
     protected boolean levelTwo;
     protected boolean enable;
 
@@ -31,7 +30,7 @@ public class Hero {
         this.vitesse = vitesse;
         this.respawn = respawn;
         monsters = new ArrayList<>();
-        powers = new ArrayList<>(6); //un personnage n'a jamais plus de 6 pouvoirs
+        //powers = new ArrayList<>(6); //un personnage n'a jamais plus de 6 pouvoirs
         levelTwo = false;
         enable = true;
     }
@@ -40,9 +39,9 @@ public class Hero {
 
     public String getName() {return name;}
 
-    public ArrayList<Power> getPowers() {
+    /*public ArrayList<Power> getPowers() {
         return powers;
-    }
+    }*/
 
     public boolean isEnable() {
         return enable;
@@ -50,6 +49,16 @@ public class Hero {
 
     public void setEnable(boolean enable) {
         this.enable = enable;
+    }
+
+    public Job getJob()
+    {
+        return job;
+    }
+
+    public void setJob(Job job)
+    {
+        this.job = job;
     }
 }
 

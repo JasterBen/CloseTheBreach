@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/character_descritpion_image"
+        android:layout_width="@dimen/character_description_image"
+        android:layout_height="@dimen/character_description_image"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"/>
+
+    <TextView
+        android:id="@+id/character_descritpion_name"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/character_description_title_height"
+        android:textSize="18sp"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/character_descritpion_image"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/activity_horizontal_margin"/>
+
+    <TextView
+        android:id="@+id/character_descritpion_job"
+        android:layout_width="match_parent"
+        android:textSize="18sp"
+        android:layout_height="@dimen/character_description_title_height"
+        android:layout_below="@+id/character_descritpion_name"
+        android:layout_toRightOf="@+id/character_descritpion_image"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/activity_horizontal_margin"/>
+
+    <TextView
+        android:id="@+id/character_descritpion_passif"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/character_description_title_height"
+        android:layout_below="@+id/character_descritpion_image"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:maxLines="2"/>
+
+    <ListView
+        android:id="@+id/character_descritpion_power_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/character_descritpion_passif"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin">
+    </ListView>
+
+</RelativeLayout>
