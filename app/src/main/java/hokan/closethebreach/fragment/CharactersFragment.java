@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 import hokan.closethebreach.R;
 import hokan.closethebreach.adapter.ImageAdapter;
 import hokan.closethebreach.creatures.Hero;
+import hokan.closethebreach.utils.Attack;
 import hokan.closethebreach.utils.Job;
 import hokan.closethebreach.utils.Power;
 
@@ -36,6 +38,8 @@ public class CharactersFragment extends DialogFragment implements AdapterView.On
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_characters, container, false);
+
+        getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
 
         gridView = (GridView) v.findViewById(R.id.characters_grid);
         imageAdapter = new ImageAdapter(getActivity());
@@ -95,7 +99,7 @@ public class CharactersFragment extends DialogFragment implements AdapterView.On
             //String prout = "prout";
             ArrayList<Power> powers = new ArrayList<>();
             powers.add(new Power("Attaque prudente"));
-            powers.add(new Power("Tir de chasseur"));
+            powers.add(new Power("Tir de chasseur", new Attack(6, 1)));
             powers.add(new Power("Double tir"));
             powers.add(new Power("Course d'attaque"));
             powers.add(new Power("Aide cruciale"));

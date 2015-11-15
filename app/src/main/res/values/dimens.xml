@@ -10,4 +10,7 @@
 
     <dimen name="character_description_image">100dp</dimen>
     <dimen name="character_description_title_height">50dp</dimen>
+    <dimen name="character_description_tab">200dp</dimen>
+
+    <dimen name="dialog_margin">10dp</dimen>
 </resources>

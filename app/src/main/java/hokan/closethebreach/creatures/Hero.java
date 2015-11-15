@@ -60,5 +60,21 @@ public class Hero {
     {
         this.job = job;
     }
+
+    public int getArmorClass() {
+        return armorClass;
+    }
+
+    public int getHp() {
+        return hp;
+    }
+
+    public int getVitesse() {
+        return vitesse;
+    }
+
+    public int getRespawn() {
+        return respawn;
+    }
 }
 

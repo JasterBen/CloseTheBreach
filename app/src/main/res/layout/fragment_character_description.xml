@@ -9,7 +9,51 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"/>
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin"/>
+
+    <RelativeLayout
+        android:id="@+id/character_descritpion_stats_container"
+        android:layout_width="@dimen/character_description_tab"
+        android:layout_height="@dimen/character_description_image"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin">
+
+        <TextView
+            android:id="@+id/character_descritpion_armor_class"
+            android:layout_width="@dimen/character_description_image"
+            android:layout_height="@dimen/character_description_title_height"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/character_descritpion_hp"
+            android:layout_width="@dimen/character_description_image"
+            android:layout_height="@dimen/character_description_title_height"
+            android:layout_alignParentTop="true"
+            android:gravity="center"
+            android:layout_toRightOf="@+id/character_descritpion_armor_class"/>
+
+        <TextView
+            android:id="@+id/character_descritpion_speed"
+            android:layout_width="@dimen/character_description_image"
+            android:layout_height="@dimen/character_description_title_height"
+            android:layout_alignParentLeft="true"
+            android:gravity="center"
+            android:layout_alignParentBottom="true"/>
+
+        <TextView
+            android:id="@+id/character_descritpion_respawn"
+            android:layout_width="@dimen/character_description_image"
+            android:layout_height="@dimen/character_description_title_height"
+            android:layout_alignParentBottom="true"
+            android:gravity="center"
+            android:layout_toRightOf="@+id/character_descritpion_speed"/>
+
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/character_descritpion_name"
@@ -18,8 +62,10 @@
         android:textSize="18sp"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/character_descritpion_image"
+        android:layout_toLeftOf="@+id/character_descritpion_stats_container"
         android:gravity="center_vertical"
-        android:paddingLeft="@dimen/activity_horizontal_margin"/>
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin"/>
 
     <TextView
         android:id="@+id/character_descritpion_job"
@@ -28,6 +74,7 @@
         android:layout_height="@dimen/character_description_title_height"
         android:layout_below="@+id/character_descritpion_name"
         android:layout_toRightOf="@+id/character_descritpion_image"
+        android:layout_toLeftOf="@+id/character_descritpion_stats_container"
         android:gravity="center_vertical"
         android:paddingLeft="@dimen/activity_horizontal_margin"/>
 
@@ -45,7 +92,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/character_descritpion_passif"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin">
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginBottom="@dimen/activity_vertical_margin">
     </ListView>
 
 </RelativeLayout>

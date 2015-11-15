@@ -3,19 +3,19 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
-    <string name="button_play">Play</string>
+    <string name="button_play">Jouer</string>
     <string name="button_option">Options</string>
-    <string name="button_quit">Quit</string>
+    <string name="button_quit">Quitter</string>
 
-    <string name="button_new">New game</string>
-    <string name="button_load">Load game</string>
+    <string name="button_new">Nouvelle partie</string>
+    <string name="button_load">Charger partie</string>
 
-    <string name="quit_alert_dialog_title">Quit</string>
-    <string name="quit_alert_dialog_message">Do you really want to quit ?</string>
+    <string name="quit_alert_dialog_title">Quitter</string>
+    <string name="quit_alert_dialog_message">Voulez vous vraiment quitter</string>
 
-    <string name="team_button">Start game</string>
-    <string name="team_title">Choose your characters</string>
-    <string name="team_character_number">Character </string>
+    <string name="team_button">Commencer</string>
+    <string name="team_title">Choisissez vos personnages</string>
+    <string name="team_character_number">Personnage</string>
 
     <string name="hero_1">Allisa</string>
     <string name="hero_2">Arjhan</string>
@@ -35,5 +35,12 @@
     <string name="hero_16">Wulfgar</string>
     <string name="hero_17">Artemis</string>
     <string name="hero_18">Athrogate</string>
+
+    <string name="armor">CA</string>
+    <string name="hp">PV</string>
+    <string name="speed">Vitesse</string>
+    <string name="respawn">PV Res</string>
+    <string name="attack">Attaque</string>
+    <string name="damage">Dommage</string>
 
 </resources>

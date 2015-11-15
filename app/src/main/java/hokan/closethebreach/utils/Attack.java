@@ -12,4 +12,12 @@ public class Attack {
         this.modif = modif;
         this.damage = damage;
     }
+
+    public int getModif() {
+        return modif;
+    }
+
+    public int getDamage() {
+        return damage;
+    }
 }
