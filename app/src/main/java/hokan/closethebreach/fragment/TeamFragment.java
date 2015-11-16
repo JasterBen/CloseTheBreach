@@ -31,20 +31,21 @@ public class TeamFragment extends Fragment {
     public static final String IMAGE = "image";
     public static final String NAME = "name";
     public static final int REQ_CODE = 1;
+    public static final String HEROES = "heroes";
 
-    GridView grid;
-    TeamAdapter adapter;
-    View selectedView;
-    Button start;
+    protected GridView grid;
+    protected TeamAdapter adapter;
+    protected View selectedView;
+    protected int selectedViewPosition;
+    protected Button start;
+
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_team, container, false);
-
         final Activity activity = getActivity();
-
         Typeface font = GameApplication.getApplication().font;
 
         TextView title = (TextView) v.findViewById(R.id.team_title);
@@ -52,6 +53,8 @@ public class TeamFragment extends Fragment {
 
         grid = (GridView) v.findViewById(R.id.team_grid);
         adapter = new TeamAdapter(activity);
+        if (savedInstanceState != null)
+            adapter.setHeroesSelected(savedInstanceState.getIntArray(HEROES));
         grid.setAdapter(adapter);
         grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -63,6 +66,7 @@ public class TeamFragment extends Fragment {
 //                transaction.addToBackStack("Team");
 //                transaction.commit();
                 selectedView = view;
+                selectedViewPosition = position;
                 FragmentManager manager = getFragmentManager();
                 CharactersFragment dialog = new CharactersFragment();
                 dialog.setTargetFragment(TeamFragment.this, REQ_CODE);
@@ -79,13 +83,20 @@ public class TeamFragment extends Fragment {
 
 
     @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putIntArray(HEROES, adapter.getHeroesSelected());
+    }
+
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        int pos = data.getIntExtra(CharactersFragment.POSITION, -1);
+        int heroPos = data.getIntExtra(CharactersFragment.POSITION, -1);
         int image = R.drawable.shield;
         String name = null;
-        if (pos != -1)
+        if (heroPos != -1)
         {
-            Hero hero = GameApplication.getApplication().getHeroes().get(pos);
+            Hero hero = GameApplication.getApplication().getHeroes().get(heroPos);
+            adapter.setHero(selectedViewPosition, heroPos);
             image = hero.getImage();
             name = hero.getName();
         }
@@ -96,14 +107,5 @@ public class TeamFragment extends Fragment {
         if (!start.isClickable())
             start.setClickable(true);
         super.onActivityResult(requestCode, resultCode, data);
-    }
-
-
-    @Override
-    public void onDestroy() {
-        ArrayList<Hero> heroes = GameApplication.getApplication().getHeroes();
-        for (Hero h : heroes)
-            h.setEnable(true);
-        super.onDestroy();
     }
 }

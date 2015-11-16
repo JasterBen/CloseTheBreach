@@ -9,25 +9,31 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 import hokan.closethebreach.GameApplication;
 import hokan.closethebreach.R;
+import hokan.closethebreach.creatures.Hero;
 
 /**
  * Created by Utilisateur on 14/11/2015.
  */
 public class TeamAdapter extends BaseAdapter {
 
-    private final static int COUNT = 5;
+    private static final int HERONUMBER = 5;
 
     protected Context context;
+    protected int[] heroesSelected = new int[HERONUMBER];
 
     public TeamAdapter(Context context) {
         this.context = context;
+        for (int i = 0; i < HERONUMBER; i++)
+            setHero(i, -1);
     }
 
     @Override
     public int getCount() {
-        return COUNT;
+        return HERONUMBER;
     }
 
     @Override
@@ -58,11 +64,32 @@ public class TeamAdapter extends BaseAdapter {
         character_number.setTypeface(font);
 
         ImageView character_image = (ImageView) character.findViewById(R.id.character_image);
-        character_image.setImageResource(R.drawable.shield);
 
         TextView character_name = (TextView) character.findViewById(R.id.character_name_textview);
         character_name.setTypeface(font);
 
+        if (heroesSelected[position] == -1)
+            character_image.setImageResource(R.drawable.shield);
+        else
+        {
+            Hero hero = GameApplication.getApplication().getHeroes().get(heroesSelected[position]);
+            character_image.setImageResource(hero.getImage());
+            character_name.setText(hero.getName());
+        }
+
+
         return character;
+    }
+
+    public int[] getHeroesSelected() {
+        return heroesSelected;
+    }
+
+    public void setHeroesSelected (int[] heroes) {
+        heroesSelected = heroes;
+    }
+
+    public void setHero(int position, int hero) {
+        heroesSelected[position] = hero;
     }
 }

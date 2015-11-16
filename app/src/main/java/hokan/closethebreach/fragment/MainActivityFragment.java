@@ -14,8 +14,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 import hokan.closethebreach.GameApplication;
 import hokan.closethebreach.R;
+import hokan.closethebreach.creatures.Hero;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -50,6 +53,9 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
     @Override
     public void onResume() {
         super.onResume();
+        ArrayList<Hero> heroes = GameApplication.getApplication().getHeroes();
+        for (Hero h : heroes)
+            h.setEnable(true);
     }
 
     @Override
