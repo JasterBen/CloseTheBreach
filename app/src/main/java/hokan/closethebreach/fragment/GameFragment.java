@@ -1,11 +1,17 @@
 package hokan.closethebreach.fragment;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -13,11 +19,15 @@ import hokan.closethebreach.GameActivity;
 import hokan.closethebreach.GameApplication;
 import hokan.closethebreach.R;
 import hokan.closethebreach.adapter.GameAdapter;
+import hokan.closethebreach.creatures.Hero;
 
 /**
  * Created by bmeunier on 17/11/15.
  */
-public class GameFragment extends Fragment {
+public class GameFragment extends Fragment implements AdapterView.OnItemClickListener {
+
+    protected GameActivity activity;
+    GameAdapter adapter;
 
     @Nullable
     @Override
@@ -26,10 +36,12 @@ public class GameFragment extends Fragment {
 
         if (savedInstanceState == null)
         {
-            GameActivity activity = (GameActivity) getActivity();
+            activity = (GameActivity) getActivity();
 
             ListView listview = (ListView) v.findViewById(R.id.game_heroes_list);
-            listview.setAdapter(new GameAdapter(activity));
+            adapter = new GameAdapter(activity);
+            listview.setAdapter(adapter);
+            listview.setOnItemClickListener(this);
 
             TextView life = (TextView) v.findViewById(R.id.life_number_text);
             life.setTypeface(GameApplication.getApplication().font);
@@ -37,5 +49,27 @@ public class GameFragment extends Fragment {
         }
 
         return v;
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        DrawerLayout drawerLayout = (DrawerLayout) getActivity().findViewById(R.id.game_drawer);
+        Hero hero = adapter.getItem(position);
+
+        Typeface font = GameApplication.getApplication().font;
+
+        NavigationView navigation = (NavigationView) drawerLayout.findViewById(R.id.game_navigation);
+        ImageView image = (ImageView) navigation.findViewById(R.id.navigation_header_image);
+        image.setImageResource(hero.getImage());
+
+        TextView name = (TextView) navigation.findViewById(R.id.navigation_header_name);
+        name.setTypeface(font);
+        name.setText(hero.getName());
+
+        TextView health = (TextView) navigation.findViewById(R.id.navigation_header_health);
+        health.setTypeface(font);
+        health.setText(hero.getCurrentHp() + "/" + hero.getHp());
+
+        drawerLayout.openDrawer(GravityCompat.START);
     }
 }

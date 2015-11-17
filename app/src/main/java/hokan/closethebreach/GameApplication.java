@@ -2,6 +2,7 @@ package hokan.closethebreach;
 
 import android.app.Application;
 import android.graphics.Typeface;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -107,5 +108,9 @@ public class GameApplication extends Application {
         jobs.add(new Job(getString(R.string.job_17), null));
         jobs.add(new Job(getString(R.string.job_18), null));
         return jobs;
+    }
+
+    public void setTypeFont(TextView text) {
+        text.setTypeface(font);
     }
 }

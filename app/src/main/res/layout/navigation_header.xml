@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:layout_margin="@dimen/game_margin">
+
+    <ImageView
+        android:id="@+id/navigation_header_image"
+        android:layout_width="@dimen/navigation_image"
+        android:layout_height="@dimen/navigation_image" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/navigation_image">
+
+        <TextView
+            android:id="@+id/navigation_header_name"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/navigation_text_height"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/navigation_header_health"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/navigation_text_height"
+            android:gravity="center"
+            android:layout_below="@+id/navigation_header_name"/>
+
+    </RelativeLayout>
+
+
+</LinearLayout>
