@@ -20,7 +20,7 @@ import hokan.closethebreach.creatures.Hero;
  */
 public class TeamAdapter extends BaseAdapter {
 
-    private static final int HERONUMBER = 5;
+    public static final int HERONUMBER = 5;
 
     protected Context context;
     protected int[] heroesSelected = new int[HERONUMBER];

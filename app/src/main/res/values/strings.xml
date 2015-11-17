@@ -62,4 +62,7 @@
     <string name="attack">Attaque</string>
     <string name="damage">Dommage</string>
 
+    <string name="lifes">Lifes</string>
+    <string name="base_life">3</string>
+
 </resources>

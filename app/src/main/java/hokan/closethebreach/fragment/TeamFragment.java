@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import hokan.closethebreach.GameActivity;
 import hokan.closethebreach.GameApplication;
 import hokan.closethebreach.R;
 import hokan.closethebreach.adapter.TeamAdapter;
@@ -26,10 +27,9 @@ import hokan.closethebreach.creatures.Hero;
 /**
  * Created by Utilisateur on 14/11/2015.
  */
-public class TeamFragment extends Fragment {
+public class TeamFragment extends Fragment implements View.OnClickListener {
 
-    public static final String IMAGE = "image";
-    public static final String NAME = "name";
+
     public static final int REQ_CODE = 1;
     public static final String HEROES = "heroes";
 
@@ -75,6 +75,7 @@ public class TeamFragment extends Fragment {
         });
 
         start = (Button) v.findViewById(R.id.team_button);
+        start.setOnClickListener(this);
         start.setClickable(false);
         start.setTypeface(font);
 
@@ -107,5 +108,12 @@ public class TeamFragment extends Fragment {
         if (!start.isClickable())
             start.setClickable(true);
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onClick(View v) {
+        Intent intent = new Intent(getActivity(), GameActivity.class);
+        intent.putExtra(GameActivity.HEROES, adapter.getHeroesSelected());
+        startActivity(intent);
     }
 }

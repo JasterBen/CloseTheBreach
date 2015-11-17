@@ -13,6 +13,7 @@ public class Hero {
     protected Job job;
     protected int armorClass;
     protected int hp;
+    protected int currentHp;
     protected int vitesse;
     protected int respawn;
     protected ArrayList<Monster> monsters;
@@ -27,6 +28,7 @@ public class Hero {
         this.job = job;
         this.armorClass = armorClass;
         this.hp = hp;
+        this.currentHp = hp;
         this.vitesse = vitesse;
         this.respawn = respawn;
         monsters = new ArrayList<>();
@@ -76,5 +78,7 @@ public class Hero {
     public int getRespawn() {
         return respawn;
     }
+
+    public int getCurrentHp() { return currentHp; }
 }
 

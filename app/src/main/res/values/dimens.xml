@@ -13,4 +13,8 @@
     <dimen name="character_description_tab">200dp</dimen>
 
     <dimen name="dialog_margin">10dp</dimen>
+
+    <dimen name="game_hero_card_width">50dp</dimen>
+    <dimen name="game_hero_card_text_height">15dp</dimen>
+    <dimen name="game_margin">5dp</dimen>
 </resources>
