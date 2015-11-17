@@ -1,6 +1,7 @@
 package hokan.closethebreach;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -22,21 +23,32 @@ public class GameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
 
         if (savedInstanceState == null)
         {
             Intent intent = getIntent();
             if (intent != null)
                 heroes = intent.getIntArrayExtra(HEROES);
-
-            GameFragment frag = new GameFragment();
-
-            FragmentManager manager = getSupportFragmentManager();
-            FragmentTransaction transaction = manager.beginTransaction();
-            transaction.replace(R.id.game_container, frag);
-            transaction.commit();
+        }
+        else
+        {
+            heroes = savedInstanceState.getIntArray(HEROES);
         }
 
+        GameFragment frag = new GameFragment();
+
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.replace(R.id.game_container, frag);
+        transaction.commit();
+
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putIntArray(HEROES, heroes);
     }
 
     public int[] getHeroes() {

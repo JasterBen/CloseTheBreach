@@ -19,21 +19,22 @@ import hokan.closethebreach.adapter.GameAdapter;
  */
 public class GameFragment extends Fragment {
 
-
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_game, container, false);
 
-        GameActivity activity = (GameActivity) getActivity();
+        if (savedInstanceState == null)
+        {
+            GameActivity activity = (GameActivity) getActivity();
 
-        ListView listview = (ListView) v.findViewById(R.id.game_heroes_list);
-        listview.setAdapter(new GameAdapter(activity));
+            ListView listview = (ListView) v.findViewById(R.id.game_heroes_list);
+            listview.setAdapter(new GameAdapter(activity));
 
-        TextView life = (TextView) v.findViewById(R.id.life_number_text);
-        life.setTypeface(GameApplication.getApplication().font);
-        life.setText(activity.getString(R.string.lifes) + "\n" + activity.getString(R.string.base_life));
+            TextView life = (TextView) v.findViewById(R.id.life_number_text);
+            life.setTypeface(GameApplication.getApplication().font);
+            life.setText(activity.getString(R.string.lifes) + "\n" + activity.getString(R.string.base_life));
+        }
 
         return v;
     }
