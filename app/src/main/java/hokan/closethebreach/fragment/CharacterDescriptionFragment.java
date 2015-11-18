@@ -27,8 +27,8 @@ public class CharacterDescriptionFragment extends DialogFragment {
 
     public static final String HERO = "heros";
 
-    int position;
-    Hero hero;
+    protected int position;
+    protected Hero hero;
 
 
     @Override
@@ -75,7 +75,7 @@ public class CharacterDescriptionFragment extends DialogFragment {
         TextView armor = (TextView) v.findViewById(R.id.character_descritpion_armor_class);
         armor.setTypeface(font);
         if (hero != null)
-            armor.setText(activity.getString(R.string.armor) + "\n" + hero.getArmorClass());
+            armor.setText(activity.getString(R.string.armor) + "\n" + hero.getArmor());
 
         TextView hp = (TextView) v.findViewById(R.id.character_descritpion_hp);
         hp.setTypeface(font);
@@ -85,7 +85,7 @@ public class CharacterDescriptionFragment extends DialogFragment {
         TextView speed = (TextView) v.findViewById(R.id.character_descritpion_speed);
         speed.setTypeface(font);
         if (hero != null)
-            speed.setText(activity.getString(R.string.speed) + "\n" + hero.getVitesse());
+            speed.setText(activity.getString(R.string.speed) + "\n" + hero.getSpeed());
 
         TextView respawn = (TextView) v.findViewById(R.id.character_descritpion_respawn);
         respawn.setTypeface(font);
@@ -129,7 +129,7 @@ public class CharacterDescriptionFragment extends DialogFragment {
         getDialog().getWindow().setAttributes((android.view.WindowManager.LayoutParams) params);
     }
 
-    public int getBundleArg(Bundle bundle)
+    protected int getBundleArg(Bundle bundle)
     {
         return bundle.getInt(CharactersFragment.POSITION);
     }

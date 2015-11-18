@@ -1,5 +1,6 @@
 package hokan.closethebreach.fragment;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,6 +9,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -15,19 +18,24 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
+import hokan.closethebreach.FieldActivity;
 import hokan.closethebreach.GameActivity;
 import hokan.closethebreach.GameApplication;
 import hokan.closethebreach.R;
 import hokan.closethebreach.adapter.GameAdapter;
 import hokan.closethebreach.creatures.Hero;
+import hokan.closethebreach.utils.Power;
 
 /**
  * Created by bmeunier on 17/11/15.
  */
-public class GameFragment extends Fragment implements AdapterView.OnItemClickListener {
+public class GameFragment extends Fragment implements AdapterView.OnItemClickListener,
+        NavigationView.OnNavigationItemSelectedListener {
 
     protected GameActivity activity;
-    GameAdapter adapter;
+    protected GameAdapter adapter;
 
     @Nullable
     @Override
@@ -55,10 +63,19 @@ public class GameFragment extends Fragment implements AdapterView.OnItemClickLis
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         DrawerLayout drawerLayout = (DrawerLayout) getActivity().findViewById(R.id.game_drawer);
         Hero hero = adapter.getItem(position);
+        ArrayList<Power> heroPowers = hero.getJob().getPowers();
+        int heroPowersSize = heroPowers == null ? 0 : heroPowers.size();
 
         Typeface font = GameApplication.getApplication().font;
 
         NavigationView navigation = (NavigationView) drawerLayout.findViewById(R.id.game_navigation);
+        Menu menu = navigation.getMenu();
+        menu.clear();
+        menu.add(R.string.draw_circle);
+        for (int i = 0; i < heroPowersSize; i++)
+            menu.add(heroPowers.get(i).getName());
+        navigation.setNavigationItemSelectedListener(this);
+
         ImageView image = (ImageView) navigation.findViewById(R.id.navigation_header_image);
         image.setImageResource(hero.getImage());
 
@@ -71,5 +88,14 @@ public class GameFragment extends Fragment implements AdapterView.OnItemClickLis
         health.setText(hero.getCurrentHp() + "/" + hero.getHp());
 
         drawerLayout.openDrawer(GravityCompat.START);
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        DrawerLayout drawer = (DrawerLayout) getActivity().findViewById(R.id.game_drawer);
+        drawer.closeDrawer(GravityCompat.START);
+        Intent intent = new Intent(getActivity(), FieldActivity.class);
+        startActivity(intent);
+        return false;
     }
 }

@@ -11,25 +11,25 @@ public class Hero {
     protected String name;
     protected int image;
     protected Job job;
-    protected int armorClass;
+    protected int armor;
     protected int hp;
     protected int currentHp;
-    protected int vitesse;
+    protected int speed;
     protected int respawn;
     protected ArrayList<Monster> monsters;
     //protected ArrayList<Power> powers;
     protected boolean levelTwo;
     protected boolean enable;
 
-    public Hero(String name, int image, Job job, int armorClass, int hp,
-                int vitesse, int respawn) {
+    public Hero(String name, int image, Job job, int armor, int hp,
+                int speed, int respawn) {
         this.name = name;
         this.image = image;
         this.job = job;
-        this.armorClass = armorClass;
+        this.armor = armor;
         this.hp = hp;
         this.currentHp = hp;
-        this.vitesse = vitesse;
+        this.speed = speed;
         this.respawn = respawn;
         monsters = new ArrayList<>();
         //powers = new ArrayList<>(6); //un personnage n'a jamais plus de 6 pouvoirs
@@ -63,16 +63,16 @@ public class Hero {
         this.job = job;
     }
 
-    public int getArmorClass() {
-        return armorClass;
+    public int getArmor() {
+        return armor;
     }
 
     public int getHp() {
         return hp;
     }
 
-    public int getVitesse() {
-        return vitesse;
+    public int getSpeed() {
+        return speed;
     }
 
     public int getRespawn() {

@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import hokan.closethebreach.FieldActivity;
 import hokan.closethebreach.GameActivity;
 import hokan.closethebreach.GameApplication;
 import hokan.closethebreach.R;

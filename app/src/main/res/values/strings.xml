@@ -65,4 +65,6 @@
     <string name="lifes">Lifes</string>
     <string name="base_life">3</string>
 
+    <string name="draw_circle">Draw a circle</string>
+
 </resources>

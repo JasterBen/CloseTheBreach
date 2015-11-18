@@ -2,6 +2,7 @@ package hokan.closethebreach.fragment;
 
 import android.app.Activity;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import hokan.closethebreach.FieldActivity;
 import hokan.closethebreach.GameApplication;
 import hokan.closethebreach.R;
 import hokan.closethebreach.creatures.Hero;
@@ -75,6 +77,8 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
                 break;
             case R.id.button_option :
                 Toast.makeText(activity, R.string.button_option, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getActivity(), FieldActivity.class);
+                startActivity(intent);
                 break;
             case R.id.button_quit :
                 AlertDialog.Builder quit = new AlertDialog.Builder(activity);

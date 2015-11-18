@@ -109,8 +109,4 @@ public class GameApplication extends Application {
         jobs.add(new Job(getString(R.string.job_18), null));
         return jobs;
     }
-
-    public void setTypeFont(TextView text) {
-        text.setTypeface(font);
-    }
 }

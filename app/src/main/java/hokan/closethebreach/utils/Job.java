@@ -6,6 +6,7 @@ import java.util.ArrayList;
  * Created by Utilisateur on 14/11/2015.
  */
 public class Job {
+
     protected String name;
     protected ArrayList<Power> powers;
 

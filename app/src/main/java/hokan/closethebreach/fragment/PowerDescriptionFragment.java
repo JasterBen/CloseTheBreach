@@ -80,7 +80,7 @@ public class PowerDescriptionFragment extends DialogFragment {
         outState.putInt(CharactersFragment.POSITION, powerPos);
     }
 
-    public void getBundleArg(Bundle bundle)
+    protected void getBundleArg(Bundle bundle)
     {
         heroPos = bundle.getInt(CharacterDescriptionFragment.HERO);
         powerPos = bundle.getInt(CharactersFragment.POSITION);

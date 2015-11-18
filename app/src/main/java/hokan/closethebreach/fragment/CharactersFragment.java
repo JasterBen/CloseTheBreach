@@ -79,7 +79,7 @@ public class CharactersFragment extends DialogFragment implements AdapterView.On
     }
 
 
-    public void onItemSelected(boolean isLong, int position)
+    protected void onItemSelected(boolean isLong, int position)
     {
         Hero hero = imageAdapter.getItem(position);
         if (!isLong)
