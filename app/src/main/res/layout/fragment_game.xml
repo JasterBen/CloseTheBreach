@@ -4,17 +4,27 @@
 
     <ListView
         android:id="@+id/game_heroes_list"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_width="@dimen/game_hero_card_width"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_margin="@dimen/game_margin">
     </ListView>
 
+    <hokan.closethebreach.utils.FieldView
+        android:id="@+id/game_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:layout_toRightOf="@+id/game_heroes_list"
+        android:layout_margin="@dimen/game_margin"/>
+
     <TextView
         android:id="@+id/life_number_text"
-        android:layout_width="@dimen/game_hero_card_width"
-        android:layout_height="@dimen/game_hero_card_width"
+        android:layout_width="@dimen/game_life_card"
+        android:layout_height="@dimen/game_life_card"
         android:gravity="center"
+        android:textColor="#ff0000"
+        android:background="#ffffff"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_margin="@dimen/game_margin"/>

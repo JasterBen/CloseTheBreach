@@ -1,6 +1,5 @@
 package hokan.closethebreach.fragment;
 
-import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -20,7 +19,6 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import hokan.closethebreach.FieldActivity;
 import hokan.closethebreach.GameActivity;
 import hokan.closethebreach.GameApplication;
 import hokan.closethebreach.R;
@@ -53,7 +51,7 @@ public class GameFragment extends Fragment implements AdapterView.OnItemClickLis
 
             TextView life = (TextView) v.findViewById(R.id.life_number_text);
             life.setTypeface(GameApplication.getApplication().font);
-            life.setText(activity.getString(R.string.lifes) + "\n" + activity.getString(R.string.base_life));
+            life.setText(activity.getString(R.string.base_life) + "\n" + activity.getString(R.string.lifes));
         }
 
         return v;

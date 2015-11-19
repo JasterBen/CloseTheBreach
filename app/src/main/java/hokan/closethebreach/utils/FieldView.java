@@ -17,10 +17,8 @@ import android.widget.Toast;
  */
 public class FieldView extends View {
 
-    private static final float LINE_DP_SIZE = 5;
-    private static final float CASE_DP_SIZE = 50;
-    private static final int HORIZONTAL_CASE_NUMBER = 3;
-    private static final int VERTICAL_CASE_NUMBER = 3;
+    private static final float LINE_DP_SIZE = 2;
+    private static final float CASE_DP_SIZE = 25;
 
     protected Paint paint;
     protected int height;
@@ -44,8 +42,6 @@ public class FieldView extends View {
     protected GestureDetector detector;
 
     protected Context context;
-
-
 
 
     public FieldView(Context context) {
@@ -85,8 +81,8 @@ public class FieldView extends View {
         verticalCaseNumber = (int) (width /dpToPx(CASE_DP_SIZE));
         horizontalCaseNumber = (int) (height/dpToPx(CASE_DP_SIZE));
 
-        caseHeight = (height - ((horizontalCaseNumber - 1) * strokeWidth)) / horizontalCaseNumber;
-        caseWidth = (width - ((verticalCaseNumber - 1) * strokeWidth)) / verticalCaseNumber;
+        caseHeight = (height - ((horizontalCaseNumber + 1) * strokeWidth)) / horizontalCaseNumber;
+        caseWidth = (width - ((verticalCaseNumber + 1) * strokeWidth)) / verticalCaseNumber;
 
         createTabs();
     }
@@ -103,8 +99,8 @@ public class FieldView extends View {
     protected void drawHorizontalLines(Canvas canvas)
     {
         paint.setColor(Color.GRAY);
-        float y = caseHeight + strokeWidth / 2;
-        for (int i = 1; i < horizontalCaseNumber; i++)
+        float y = strokeWidth / 2;
+        for (int i = 0; i <= horizontalCaseNumber; i++)
         {
             if (i % 3 == 0)
                 paint.setColor(Color.BLACK);
@@ -118,8 +114,8 @@ public class FieldView extends View {
     protected void drawVerticalLines(Canvas canvas)
     {
         paint.setColor(Color.GRAY);
-        float x = caseWidth + strokeWidth / 2;
-        for (int i = 1; i < verticalCaseNumber; i++)
+        float x = strokeWidth / 2;
+        for (int i = 0; i <= verticalCaseNumber; i++)
         {
             if (i % 3 == 0)
                 paint.setColor(Color.BLACK);
@@ -155,7 +151,7 @@ public class FieldView extends View {
     public boolean onTouchEvent(MotionEvent event) {
 
         boolean result = detector.onTouchEvent(event);
-        int radius = 65;
+        int radius = 30;
 
         switch (event.getAction()) {
             case MotionEvent.ACTION_UP :
@@ -199,10 +195,10 @@ public class FieldView extends View {
         int div = Math.max(verticalCaseNumber, horizontalCaseNumber);
         for (int i = 0; i < tabSize; i++)
         {
-            int left = (int) ((i % div) * (caseWidth + strokeWidth));
-            int top = (int) ((i / div) * (caseHeight + strokeWidth));
-            int right = (int) ((((i % div) + 1) * caseWidth) + ((i % div) * strokeWidth));
-            int down = (int) ((((i / div) + 1) * caseHeight) + ((i / div) * strokeWidth));
+            int left = (int) (((i % div) * caseWidth) + (((i % div) + 1) * strokeWidth));
+            int top = (int) (((i / div) * caseHeight) + (((i / div) + 1) * strokeWidth));
+            int right = (int) (((i % div) + 1) * (caseWidth + strokeWidth));
+            int down = (int) (((i / div) + 1) * (caseHeight + strokeWidth));
             caseTab[i] = new Rect(left, top, right, down);
             playTab[i] = 0;
         }
