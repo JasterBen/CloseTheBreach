@@ -71,7 +71,6 @@ public class GameFragment extends Fragment implements AdapterView.OnItemClickLis
         NavigationView navigation = (NavigationView) drawerLayout.findViewById(R.id.game_navigation);
         Menu menu = navigation.getMenu();
         menu.clear();
-        menu.add(R.string.draw_circle);
         for (int i = 0; i < heroPowersSize; i++)
             menu.add(heroPowers.get(i).getName());
         navigation.setNavigationItemSelectedListener(this);
@@ -94,8 +93,6 @@ public class GameFragment extends Fragment implements AdapterView.OnItemClickLis
     public boolean onNavigationItemSelected(MenuItem item) {
         DrawerLayout drawer = (DrawerLayout) getActivity().findViewById(R.id.game_drawer);
         drawer.closeDrawer(GravityCompat.START);
-        Intent intent = new Intent(getActivity(), FieldActivity.class);
-        startActivity(intent);
         return false;
     }
 }
