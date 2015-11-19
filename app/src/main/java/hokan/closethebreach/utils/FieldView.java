@@ -18,6 +18,7 @@ import android.widget.Toast;
 public class FieldView extends View {
 
     private static final float LINE_DP_SIZE = 5;
+    private static final float CASE_DP_SIZE = 50;
     private static final int HORIZONTAL_CASE_NUMBER = 3;
     private static final int VERTICAL_CASE_NUMBER = 3;
 
@@ -31,6 +32,8 @@ public class FieldView extends View {
 
     protected Rect[] caseTab;
     protected int tabSize;
+    protected int horizontalCaseNumber;
+    protected int verticalCaseNumber;
     protected float caseWidth;
     protected float caseHeight;
 
@@ -67,7 +70,7 @@ public class FieldView extends View {
     {
         paint = new Paint();
         paint.setAntiAlias(true);
-        strokeWidth = dpToPx();
+        strokeWidth = dpToPx(LINE_DP_SIZE);
         paint.setStrokeWidth(strokeWidth);
         detector = new GestureDetector(context, new GestureListener());
         redTurn = true;
@@ -79,8 +82,11 @@ public class FieldView extends View {
         width = w;
         height = h;
 
-        caseHeight = (height - ((HORIZONTAL_CASE_NUMBER - 1) * strokeWidth)) / HORIZONTAL_CASE_NUMBER;
-        caseWidth = (width - ((VERTICAL_CASE_NUMBER - 1) * strokeWidth)) / VERTICAL_CASE_NUMBER;
+        verticalCaseNumber = (int) (width /dpToPx(CASE_DP_SIZE));
+        horizontalCaseNumber = (int) (height/dpToPx(CASE_DP_SIZE));
+
+        caseHeight = (height - ((horizontalCaseNumber - 1) * strokeWidth)) / horizontalCaseNumber;
+        caseWidth = (width - ((verticalCaseNumber - 1) * strokeWidth)) / verticalCaseNumber;
 
         createTabs();
     }
@@ -96,23 +102,31 @@ public class FieldView extends View {
 
     protected void drawHorizontalLines(Canvas canvas)
     {
-        paint.setColor(Color.BLACK);
+        paint.setColor(Color.GRAY);
         float y = caseHeight + strokeWidth / 2;
-        for (int i = 1; i < HORIZONTAL_CASE_NUMBER; i++)
+        for (int i = 1; i < horizontalCaseNumber; i++)
         {
+            if (i % 3 == 0)
+                paint.setColor(Color.BLACK);
             canvas.drawLine(0, y, width, y, paint);
             y += caseHeight + strokeWidth;
+            if (paint.getColor() == Color.BLACK)
+                paint.setColor(Color.GRAY);
         }
     }
 
     protected void drawVerticalLines(Canvas canvas)
     {
-        paint.setColor(Color.BLACK);
+        paint.setColor(Color.GRAY);
         float x = caseWidth + strokeWidth / 2;
-        for (int i = 1; i < VERTICAL_CASE_NUMBER; i++)
+        for (int i = 1; i < verticalCaseNumber; i++)
         {
+            if (i % 3 == 0)
+                paint.setColor(Color.BLACK);
             canvas.drawLine(x, 0, x, height, paint);
             x += caseWidth + strokeWidth;
+            if (paint.getColor() == Color.BLACK)
+                paint.setColor(Color.GRAY);
         }
     }
 
@@ -132,9 +146,9 @@ public class FieldView extends View {
         }
     }
 
-    protected float dpToPx()
+    protected float dpToPx(float dp)
     {
-        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, LINE_DP_SIZE, getResources().getDisplayMetrics());
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, getResources().getDisplayMetrics());
     }
 
     @Override
@@ -173,22 +187,22 @@ public class FieldView extends View {
             default:
                 break;
         }
-
         return result;
     }
 
 
     protected void createTabs()
     {
-        tabSize = VERTICAL_CASE_NUMBER * HORIZONTAL_CASE_NUMBER;
+        tabSize = verticalCaseNumber * horizontalCaseNumber;
         caseTab = new Rect[tabSize];
         playTab = new int[tabSize];
+        int div = Math.max(verticalCaseNumber, horizontalCaseNumber);
         for (int i = 0; i < tabSize; i++)
         {
-            int left = (int) ((i % 3) * (caseWidth + strokeWidth));
-            int top = (int) ((i / 3) * (caseHeight + strokeWidth));
-            int right = (int) ((((i % 3) + 1) * caseWidth) + ((i % 3) * strokeWidth));
-            int down = (int) ((((i / 3) + 1) * caseHeight) + ((i % 3) * strokeWidth));
+            int left = (int) ((i % div) * (caseWidth + strokeWidth));
+            int top = (int) ((i / div) * (caseHeight + strokeWidth));
+            int right = (int) ((((i % div) + 1) * caseWidth) + ((i % div) * strokeWidth));
+            int down = (int) ((((i / div) + 1) * caseHeight) + ((i / div) * strokeWidth));
             caseTab[i] = new Rect(left, top, right, down);
             playTab[i] = 0;
         }
