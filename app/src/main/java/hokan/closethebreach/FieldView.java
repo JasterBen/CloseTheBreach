@@ -1,4 +1,4 @@
-package hokan.closethebreach.utils;
+package hokan.closethebreach;
 
 import android.content.Context;
 import android.graphics.Canvas;
