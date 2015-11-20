@@ -20,7 +20,7 @@ import hokan.closethebreach.R;
 public class FieldView extends View {
 
     private static final float LINE_DP_SIZE = 2;
-    //private static final float CASE_DP_SIZE = 25;
+    private static final float CASE_DP_SIZE = 25;
 
     protected Paint paint;
     protected int height;

@@ -1,6 +1,7 @@
 package hokan.closethebreach.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,8 +38,8 @@ public class TeamAdapter extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int position) {
-        return null;
+    public Integer getItem(int position) {
+        return heroesSelected[position];
     }
 
     @Override
@@ -91,5 +92,9 @@ public class TeamAdapter extends BaseAdapter {
 
     public void setHero(int position, int hero) {
         heroesSelected[position] = hero;
+    }
+
+    public int getHero(int position) {
+        return heroesSelected[position];
     }
 }

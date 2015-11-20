@@ -98,6 +98,8 @@ public class TeamFragment extends Fragment implements View.OnClickListener {
         if (heroPos != -1)
         {
             Hero hero = GameApplication.getApplication().getHeroes().get(heroPos);
+            if (adapter.getHero(selectedViewPosition) != -1)
+                GameApplication.getApplication().getHeroes().get(adapter.getHero(selectedViewPosition)).setEnable(true);
             adapter.setHero(selectedViewPosition, heroPos);
             image = hero.getImage();
             name = hero.getName();
