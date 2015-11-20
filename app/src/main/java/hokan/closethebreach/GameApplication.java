@@ -2,7 +2,6 @@ package hokan.closethebreach;
 
 import android.app.Application;
 import android.graphics.Typeface;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 

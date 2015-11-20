@@ -12,8 +12,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
-import hokan.closethebreach.R;
-
 /**
  * Created by bmeunier on 18/11/15.
  */
@@ -45,10 +43,9 @@ public class FieldView extends View {
 
     protected Context context;
 
-    protected int prevSameColor;
-    protected int whichWin;
-    protected int cpt;
-
+    //protected int prevSameColor;
+    //protected int whichWin;
+    //protected int cpt;
 
     public FieldView(Context context) {
         super(context);
@@ -76,9 +73,9 @@ public class FieldView extends View {
         paint.setStrokeWidth(strokeWidth);
         detector = new GestureDetector(context, new GestureListener());
         redTurn = true;
-        prevSameColor = 0;
-        whichWin = R.string.nobody;
-        cpt = 0;
+        //prevSameColor = 0;
+        //whichWin = R.string.nobody;
+        //cpt = 0;
     }
 
     @Override
@@ -87,10 +84,10 @@ public class FieldView extends View {
         width = w;
         height = h;
 
-        //verticalCaseNumber = (int) (width /dpToPx(CASE_DP_SIZE));
-        //horizontalCaseNumber = (int) (height/dpToPx(CASE_DP_SIZE));
-        verticalCaseNumber = 3;
-        horizontalCaseNumber = 3;
+        verticalCaseNumber = (int) (width /dpToPx(CASE_DP_SIZE));
+        horizontalCaseNumber = (int) (height/dpToPx(CASE_DP_SIZE));
+        //verticalCaseNumber = 3;
+        //horizontalCaseNumber = 3;
 
         caseHeight = (height - ((horizontalCaseNumber + 1) * strokeWidth)) / horizontalCaseNumber;
         caseWidth = (width - ((verticalCaseNumber + 1) * strokeWidth)) / verticalCaseNumber;
@@ -111,7 +108,7 @@ public class FieldView extends View {
     {
         paint.setColor(Color.GRAY);
         float y = strokeWidth / 2;
-        for (int i = 0; i <= horizontalCaseNumber; i++)
+        for (int i = -1; i <= horizontalCaseNumber; i++)
         {
             if (i % 3 == 0)
                 paint.setColor(Color.BLACK);
@@ -162,12 +159,12 @@ public class FieldView extends View {
     public boolean onTouchEvent(MotionEvent event) {
 
         boolean result = detector.onTouchEvent(event);
-        int radius = 30;
+        float radius = dpToPx(CASE_DP_SIZE) / 2;
 
         switch (event.getAction()) {
             case MotionEvent.ACTION_UP :
-                if (!haveWin() && cpt != tabSize)
-                {
+                //if (!haveWin() && cpt != tabSize)
+                //{
                     float x = event.getX();
                     float y = event.getY();
                     if (xDown != -1 && yDown != -1 &&
@@ -183,7 +180,7 @@ public class FieldView extends View {
                                 {
                                     playTab[i] = redTurn ? 1 : -1;
                                     redTurn = !redTurn;
-                                    cpt++;
+                                    //cpt++;
                                     postInvalidate();
                                 }
                                 else
@@ -193,9 +190,9 @@ public class FieldView extends View {
                             }
                         }
                     }
-                    if (haveWin() || cpt == tabSize)
-                        Toast.makeText(context, context.getString(whichWin), Toast.LENGTH_SHORT).show();
-                }
+                    //if (haveWin() || cpt == tabSize)
+                    //    Toast.makeText(context, context.getString(whichWin), Toast.LENGTH_SHORT).show();
+                //}
 
                 break;
             default:
@@ -220,8 +217,6 @@ public class FieldView extends View {
             caseTab[i] = new Rect(left, top, right, down);
             playTab[i] = 0;
         }
-
-
     }
 
 
@@ -234,43 +229,50 @@ public class FieldView extends View {
         }
     }
 
-
-    private boolean haveWin()
-    {
-        //test en diago
-        if (playTab[0] + playTab[4] + playTab[8] == 3 ||
-                playTab[0] + playTab[4] + playTab[8] == -3)
-        {
-            whichWin = playTab[0] == 1 ? R.string.red : R.string.blue;
-            return true;
-        }
-        if (playTab[2] + playTab[4] + playTab[6] == 3 ||
-                playTab[2] + playTab[4] + playTab[6] == -3)
-        {
-            whichWin = playTab[2] == 1 ? R.string.red : R.string.blue;
-            return true;
-        }
-
-
-        //test en ligne
-        for (int i = 0; i < tabSize; i += 3)
-            if (playTab[i] + playTab[i + 1] + playTab[i + 2] == 3 ||
-                    playTab[i] + playTab[i + 1] + playTab[i + 2] == -3)
-            {
-                whichWin = playTab[i] == 1 ? R.string.red : R.string.blue;
-                return true;
-            }
-
-
-        //test en colonne
-        for (int i = 0; i < horizontalCaseNumber; i++)
-            if (playTab[i] + playTab[i + 3] + playTab[i + 6] == 3 ||
-                    playTab[i] + playTab[i + 3] + playTab[i + 6] == -3)
-            {
-                whichWin = playTab[i] == 1 ? R.string.red : R.string.blue;
-                return true;
-            }
-
-        return false;
+    public int[] getPlayTab() {
+        return playTab;
     }
+
+    public void setPlayTab(int[] playTab) {
+        this.playTab = playTab;
+    }
+
+    //    private boolean haveWin()
+//    {
+//        //test en diago
+//        if (playTab[0] + playTab[4] + playTab[8] == 3 ||
+//                playTab[0] + playTab[4] + playTab[8] == -3)
+//        {
+//            whichWin = playTab[0] == 1 ? R.string.red : R.string.blue;
+//            return true;
+//        }
+//        if (playTab[2] + playTab[4] + playTab[6] == 3 ||
+//                playTab[2] + playTab[4] + playTab[6] == -3)
+//        {
+//            whichWin = playTab[2] == 1 ? R.string.red : R.string.blue;
+//            return true;
+//        }
+//
+//
+//        //test en ligne
+//        for (int i = 0; i < tabSize; i += 3)
+//            if (playTab[i] + playTab[i + 1] + playTab[i + 2] == 3 ||
+//                    playTab[i] + playTab[i + 1] + playTab[i + 2] == -3)
+//            {
+//                whichWin = playTab[i] == 1 ? R.string.red : R.string.blue;
+//                return true;
+//            }
+//
+//
+//        //test en colonne
+//        for (int i = 0; i < horizontalCaseNumber; i++)
+//            if (playTab[i] + playTab[i + 3] + playTab[i + 6] == 3 ||
+//                    playTab[i] + playTab[i + 3] + playTab[i + 6] == -3)
+//            {
+//                whichWin = playTab[i] == 1 ? R.string.red : R.string.blue;
+//                return true;
+//            }
+//
+//        return false;
+//    }
 }

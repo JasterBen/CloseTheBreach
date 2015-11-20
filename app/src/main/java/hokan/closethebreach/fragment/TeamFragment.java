@@ -16,9 +16,6 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-
-import hokan.closethebreach.FieldActivity;
 import hokan.closethebreach.GameActivity;
 import hokan.closethebreach.GameApplication;
 import hokan.closethebreach.R;
@@ -68,6 +65,8 @@ public class TeamFragment extends Fragment implements View.OnClickListener {
 //                transaction.commit();
                 selectedView = view;
                 selectedViewPosition = position;
+                if (adapter.getHero(selectedViewPosition) != -1)
+                    GameApplication.getApplication().getHeroes().get(adapter.getHero(selectedViewPosition)).setEnable(true);
                 FragmentManager manager = getFragmentManager();
                 CharactersFragment dialog = new CharactersFragment();
                 dialog.setTargetFragment(TeamFragment.this, REQ_CODE);
@@ -98,8 +97,6 @@ public class TeamFragment extends Fragment implements View.OnClickListener {
         if (heroPos != -1)
         {
             Hero hero = GameApplication.getApplication().getHeroes().get(heroPos);
-            if (adapter.getHero(selectedViewPosition) != -1)
-                GameApplication.getApplication().getHeroes().get(adapter.getHero(selectedViewPosition)).setEnable(true);
             adapter.setHero(selectedViewPosition, heroPos);
             image = hero.getImage();
             name = hero.getName();

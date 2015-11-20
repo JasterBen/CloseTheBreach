@@ -27,7 +27,7 @@ public class CharacterDescriptionFragment extends DialogFragment {
 
     public static final String HERO = "heros";
 
-    protected int position;
+    protected int heroPosition;
     protected Hero hero;
 
 
@@ -35,12 +35,12 @@ public class CharacterDescriptionFragment extends DialogFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        position = -1;
+        heroPosition = -1;
         Bundle bundle = getArguments();
         if (bundle != null)
-            position = getBundleArg(bundle);
+            heroPosition = getBundleArg(bundle);
         else if (savedInstanceState != null)
-            position = getBundleArg(savedInstanceState);
+            heroPosition = getBundleArg(savedInstanceState);
     }
 
     @Nullable
@@ -52,7 +52,7 @@ public class CharacterDescriptionFragment extends DialogFragment {
         Typeface font = app.font;
         Activity activity = getActivity();
 
-        Hero hero = position == -1 ? null : app.getHeroes().get(position);
+        Hero hero = heroPosition == -1 ? null : app.getHeroes().get(heroPosition);
 
         getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
 
@@ -100,10 +100,10 @@ public class CharacterDescriptionFragment extends DialogFragment {
         powers.setAdapter(new DialogAdapter(getActivity(), hero.getJob().getPowers()));
         powers.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int pos, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, int powerPos, long id) {
                 Bundle bundle = new Bundle();
-                bundle.putInt(CharactersFragment.POSITION, pos);
-                bundle.putInt(HERO, position);
+                bundle.putInt(CharactersFragment.POSITION, powerPos);
+                bundle.putInt(HERO, heroPosition);
                 FragmentManager manager = getFragmentManager();
                 PowerDescriptionFragment frag = new PowerDescriptionFragment();
                 frag.setArguments(bundle);
@@ -117,7 +117,7 @@ public class CharacterDescriptionFragment extends DialogFragment {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putInt(CharactersFragment.POSITION, position);
+        outState.putInt(CharactersFragment.POSITION, heroPosition);
     }
 
     @Override

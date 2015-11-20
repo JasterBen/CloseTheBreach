@@ -35,6 +35,9 @@ public class GameFragment extends Fragment implements AdapterView.OnItemClickLis
     protected GameActivity activity;
     protected GameAdapter adapter;
 
+    protected int heroClicked;
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -62,9 +65,11 @@ public class GameFragment extends Fragment implements AdapterView.OnItemClickLis
         return v;
     }
 
+
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         DrawerLayout drawerLayout = (DrawerLayout) getActivity().findViewById(R.id.game_drawer);
+        heroClicked = position;
         Hero hero = adapter.getItem(position);
         ArrayList<Power> heroPowers = hero.getJob().getPowers();
         int heroPowersSize = heroPowers == null ? 0 : heroPowers.size();
@@ -96,6 +101,15 @@ public class GameFragment extends Fragment implements AdapterView.OnItemClickLis
     public boolean onNavigationItemSelected(MenuItem item) {
         DrawerLayout drawer = (DrawerLayout) getActivity().findViewById(R.id.game_drawer);
         drawer.closeDrawer(GravityCompat.START);
+
+        String title = item.getTitle().toString();
+        ArrayList<Power> powers = adapter.getItem(heroClicked).getJob().getPowers();
+        int size = powers == null ? 0 : powers.size();
+        int pos = 0;
+        for (; pos < size; pos++)
+            if (powers.get(pos).getName().equals(title))
+                break;
+
         return false;
     }
 }
