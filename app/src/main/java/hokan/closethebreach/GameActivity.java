@@ -17,8 +17,12 @@ import hokan.closethebreach.fragment.GameFragment;
 public class GameActivity extends AppCompatActivity {
 
     public static final String HEROES = "heroes";
+    public static final String AVAILABLE_XP = "xp";
+    public static final String AVAILABLE_LIFE = "life";
 
     protected int[] heroes;
+    protected int availableXp;
+    protected int availableLife;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,10 +38,14 @@ public class GameActivity extends AppCompatActivity {
             Intent intent = getIntent();
             if (intent != null)
                 heroes = intent.getIntArrayExtra(HEROES);
+            availableXp = 0;
+            availableLife = 3;
         }
         else
         {
             heroes = savedInstanceState.getIntArray(HEROES);
+            availableXp = savedInstanceState.getInt(AVAILABLE_XP);
+            availableLife = savedInstanceState.getInt(AVAILABLE_LIFE);
         }
 
         GameFragment frag = new GameFragment();
@@ -53,6 +61,8 @@ public class GameActivity extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putIntArray(HEROES, heroes);
+        outState.putInt(AVAILABLE_XP, availableXp);
+        outState.putInt(AVAILABLE_LIFE, availableLife);
     }
 
     public int[] getHeroes() {
@@ -66,5 +76,13 @@ public class GameActivity extends AppCompatActivity {
             drawer.closeDrawer(GravityCompat.START);
         else
             finish();
+    }
+
+    public int getAvailableXp() {
+        return availableXp;
+    }
+
+    public int getAvailableLife() {
+        return availableLife;
     }
 }

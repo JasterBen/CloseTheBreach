@@ -62,7 +62,12 @@
     <string name="attack">Attaque</string>
     <string name="damage">Dommage</string>
 
-    <string name="lifes">Vies</string>
+    <string name="lifes">Vies : </string>
     <string name="base_life">3</string>
+    <string name="available_xp">XP : </string>
+
+    <string name="red">Red player wins</string>
+    <string name="blue">Blue player wins</string>
+    <string name="nobody">Nobody win</string>
 
 </resources>

@@ -17,7 +17,7 @@
     <dimen name="game_hero_card_width">50dp</dimen>
     <dimen name="game_hero_card_text_height">15dp</dimen>
     <dimen name="game_margin">5dp</dimen>
-    <dimen name="game_life_card">50dp</dimen>
+    <dimen name="game_life_card">40dp</dimen>
 
     <dimen name="navigation_width">200dp</dimen>
 

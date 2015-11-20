@@ -43,15 +43,20 @@ public class GameFragment extends Fragment implements AdapterView.OnItemClickLis
         if (savedInstanceState == null)
         {
             activity = (GameActivity) getActivity();
+            Typeface font = GameApplication.getApplication().font;
 
             ListView listview = (ListView) v.findViewById(R.id.game_heroes_list);
             adapter = new GameAdapter(activity);
             listview.setAdapter(adapter);
             listview.setOnItemClickListener(this);
 
+            TextView xp = (TextView) v.findViewById(R.id.game_xp_text);
+            xp.setTypeface(font);
+            xp.setText(activity.getString(R.string.available_xp) + activity.getAvailableXp());
+
             TextView life = (TextView) v.findViewById(R.id.life_number_text);
-            life.setTypeface(GameApplication.getApplication().font);
-            life.setText(activity.getString(R.string.base_life) + "\n" + activity.getString(R.string.lifes));
+            life.setTypeface(font);
+            life.setText(activity.getString(R.string.lifes) + activity.getAvailableLife());
         }
 
         return v;
