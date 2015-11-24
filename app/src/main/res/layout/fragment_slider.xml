@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#000000">
+
+    <TextView
+        android:id="@+id/slider_first_textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/test_text_1"
+        android:textSize="18sp"
+        android:textColor="#ffffff"
+        android:gravity="center" />
+
+    <hokan.closethebreach.SlideView
+        android:id="@+id/slider_first_slideview"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_below="@+id/slider_first_textview"
+        app:marker_number="6"
+        app:left_circle="1"
+        app:right_circle="5"
+        app:marker_color="#ffffff"/>
+
+    <TextView
+        android:id="@+id/slider_second_textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/slider_first_slideview"
+        android:text="@string/test_text_2"
+        android:textSize="18sp"
+        android:gravity="center"
+        android:textColor="#FFFFFF"/>
+
+    <hokan.closethebreach.SlideView
+        android:id="@+id/slider_second_slideview"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_below="@id/slider_second_textview"
+        app:marker_number="8"
+        app:left_circle="1"
+        app:right_circle="7"
+        app:marker_color="#ffffff"/>
+
+    <Button
+        android:id="@+id/validate_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/slider_second_slideview"
+        android:text="@string/test_button_text"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:padding="15dp"/>
+
+</RelativeLayout>

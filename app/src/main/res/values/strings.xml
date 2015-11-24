@@ -70,4 +70,12 @@
     <string name="blue">Blue player wins</string>
     <string name="nobody">Nobody win</string>
 
+
+
+    <string name="test_text_1">First slideview</string>
+    <string name="test_text_2">Second slideview</string>
+    <string name="test_button_text">Where am I ?</string>
+    <string name="test_left_circle">"Left circle is at "</string>
+    <string name="test_right_circle">"Right circle is at "</string>
+
 </resources>

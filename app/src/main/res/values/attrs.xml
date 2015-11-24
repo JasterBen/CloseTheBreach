@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="SlideView">
+        <attr name="marker_number" format="integer"/>
+        <attr name="left_circle" format="integer"/>
+        <attr name="right_circle" format="integer"/>
+        <attr name="bar_color" format="color"/>
+        <attr name="circle_color" format="color"/>
+        <attr name="bar_between_circle_color" format="color"/>
+        <attr name="marker_color" format="color"/>
+    </declare-styleable>
+</resources>

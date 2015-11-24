@@ -17,7 +17,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import hokan.closethebreach.FieldActivity;
+import hokan.closethebreach.SliderActivity;
 import hokan.closethebreach.GameApplication;
 import hokan.closethebreach.R;
 import hokan.closethebreach.creatures.Hero;
@@ -77,7 +77,7 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
                 break;
             case R.id.button_option :
                 Toast.makeText(activity, R.string.button_option, Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getActivity(), FieldActivity.class);
+                Intent intent = new Intent(getActivity(), SliderActivity.class);
                 startActivity(intent);
                 break;
             case R.id.button_quit :

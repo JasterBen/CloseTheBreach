@@ -1,20 +1,30 @@
 package hokan.closethebreach;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
+
+import java.lang.ref.WeakReference;
+
+import hokan.closethebreach.utils.OnCursorValueChangeListener;
 
 /**
  * Created by bmeunier on 20/11/15.
  */
 public class SlideView extends View {
 
-    protected Context context;
+    protected int barColor;
+    protected int circleColor;
+    protected int barBetweenCircleColor;
+    protected int markerColor;
+
     protected Paint paint;
 
     protected int width;
@@ -36,6 +46,15 @@ public class SlideView extends View {
 
     protected GestureDetector detector;
 
+    protected int markerNumber;
+    protected float[] markerTab;
+    protected float markerDist;
+
+    protected int leftCircleActualPos;
+    protected int rightCircleActualPos;
+
+    protected WeakReference<OnCursorValueChangeListener> cursorInterface = new WeakReference<OnCursorValueChangeListener>(null);
+
     public SlideView(Context context) {
         super(context);
         init(context);
@@ -43,19 +62,19 @@ public class SlideView extends View {
 
     public SlideView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        getAttrs(context, attrs);
         init(context);
     }
 
     public SlideView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        getAttrs(context, attrs);
         init(context);
     }
 
     protected void init(Context c)
     {
-        this.context = c;
-
-        detector = new GestureDetector(context, new GestureListener());
+        detector = new GestureDetector(c, new GestureListener());
 
         isInLeftCircle = false;
         isInRightCircle = false;
@@ -64,18 +83,47 @@ public class SlideView extends View {
         paint.setAntiAlias(true);
     }
 
+    protected void getAttrs(Context context, AttributeSet attrs) {
+
+        TypedArray typedArray =
+                context.getTheme().obtainStyledAttributes(attrs, R.styleable.SlideView, 0, 0);
+
+        try {
+            markerNumber = typedArray.getInt(R.styleable.SlideView_marker_number, 5);
+            leftCircleActualPos = typedArray.getInt(R.styleable.SlideView_left_circle, 0);
+            rightCircleActualPos = typedArray.getInt(R.styleable.SlideView_right_circle, markerNumber - 1);
+            barColor = typedArray.getColor(R.styleable.SlideView_bar_color, Color.GRAY);
+            circleColor = typedArray.getColor(R.styleable.SlideView_circle_color, Color.CYAN);
+            barBetweenCircleColor = typedArray.getColor(R.styleable.SlideView_bar_between_circle_color, Color.CYAN);
+            markerColor = typedArray.getColor(R.styleable.SlideView_marker_color, Color.BLACK);
+
+        } catch (Exception e) {
+        }
+        finally {
+            typedArray.recycle();
+        }
+    }
+
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
         width = w;
         height = h;
 
-        circleRadius = (5 / 2) * (height / 20);
-        leftCircleCx = width / 8 + 2 * circleRadius;
-        rightCircleCx = 7 * width / 8 - 2 * circleRadius;
+        circleRadius = (5 / 2) * (height / 15);
+        leftCircleCx = width / 8;
+        rightCircleCx = 7 * leftCircleCx;
         circleCy = height / 2;
         leftMin = leftCircleCx;
         rightMax = rightCircleCx;
+
+        markerDist = (rightCircleCx - leftCircleCx) / (markerNumber - 1);
+        markerTab = new float[markerNumber];
+        for (int i = 0; i < markerNumber; i++)
+            markerTab[i] = leftCircleCx + (i * markerDist);
+
+        leftCircleCx = markerTab[leftCircleActualPos];
+        rightCircleCx = markerTab[rightCircleActualPos];
     }
 
     @Override
@@ -83,24 +131,27 @@ public class SlideView extends View {
         super.onDraw(canvas);
 
         drawBar(canvas);
+        drawMarker(canvas);
         updateBar(canvas);
         drawCircles(canvas);
     }
 
     protected void drawBar(Canvas canvas) {
-        paint.setColor(Color.BLACK);
+        paint.setColor(barColor);
+
         float left = width / 8;
         float top = height / 2 - height / 20;
         float right = 7 * left;
         float bottom = height / 2 + height / 20;
         float rx = 50;
         float ry = 50;
-        canvas.drawRoundRect(left, top, right, bottom, rx, ry, paint);
+        RectF rect = new RectF(left, top, right, bottom);
+        canvas.drawRoundRect(rect, rx, ry, paint);
     }
 
     protected void drawCircles(Canvas canvas)
     {
-        paint.setColor(Color.BLUE);
+        paint.setColor(circleColor);
 
         canvas.drawCircle(leftCircleCx, circleCy, circleRadius, paint);
         canvas.drawCircle(rightCircleCx, circleCy, circleRadius, paint);
@@ -108,13 +159,23 @@ public class SlideView extends View {
 
     protected void updateBar(Canvas canvas)
     {
-        paint.setColor(Color.RED);
+        paint.setColor(barBetweenCircleColor);
 
         float left = leftCircleCx;
         float top = height / 2 - height / 20;
         float right = rightCircleCx;
         float bottom = height / 2 + height / 20;
         canvas.drawRect(left, top, right, bottom, paint);
+    }
+
+    protected void drawMarker(Canvas canvas)
+    {
+        paint.setColor(markerColor);
+
+        float top = circleCy + 3 * circleRadius / 2;
+        float bottom = circleCy + 2 * circleRadius;
+        for (int i = 0; i < markerNumber; i++)
+            canvas.drawLine(markerTab[i], top, markerTab[i], bottom, paint);
     }
 
 
@@ -139,12 +200,35 @@ public class SlideView extends View {
                 rightCircleLeftMargin = leftCircleCx + 2 * circleRadius;
                 break;
             case MotionEvent.ACTION_MOVE :
-                if (isInLeftCircle && event.getX() >= leftMin && event.getX() <= leftCircleRightMargin &&
+                if (isInLeftCircle &&
+                        event.getX() >= leftMin &&
+                        event.getX() <= leftCircleRightMargin &&
                         event.getX() <= rightMax)
+                {
                     leftCircleCx = event.getX();
-                else if (isInRightCircle && event.getX() >= leftMin && event.getX() <= rightMax &&
+                }
+                else if (isInRightCircle &&
+                        event.getX() >= leftMin &&
+                        event.getX() <= rightMax &&
                         event.getX() >= rightCircleLeftMargin)
+                {
                     rightCircleCx = event.getX();
+                }
+
+                postInvalidate();
+                return true;
+            case MotionEvent.ACTION_UP :
+                OnCursorValueChangeListener cursorValueChangeListener = cursorInterface.get();
+                if (isInLeftCircle) {
+                    leftCircleCx = getClosest(event.getX());
+                    if (cursorValueChangeListener != null)
+                        cursorValueChangeListener.onCursorValueChangeListener(this, true, leftCircleActualPos);
+                }
+                else if (isInRightCircle) {
+                    rightCircleCx = getClosest(event.getX());
+                    if (cursorValueChangeListener != null)
+                        cursorValueChangeListener.onCursorValueChangeListener(this, false, rightCircleActualPos);
+                }
 
                 postInvalidate();
                 return true;
@@ -153,6 +237,53 @@ public class SlideView extends View {
         }
 
         return result;
+    }
+
+    protected static float computeDist(float currentX, float markerX)
+    {
+        return (float) (Math.pow((currentX - markerX), 2));
+    }
+
+    protected float getClosest(float currentX)
+    {
+        float minDist = computeDist(currentX, markerTab[0]);
+        float markerX = markerTab[0];
+        int pos = 0;
+
+        for (int i = 1; i < markerNumber; i++)
+        {
+            minDist = Math.min(minDist, computeDist(currentX, markerTab[i]));
+            if (minDist == computeDist(currentX, markerTab[i])) {
+                markerX = markerTab[i];
+                pos = i;
+            }
+        }
+
+        if (markerX <= leftCircleCx && isInRightCircle)
+            markerX = leftCircleCx + markerDist;
+        else if (markerX >= rightCircleCx && isInLeftCircle)
+            markerX = rightCircleCx - markerDist;
+
+        if (isInLeftCircle)
+            leftCircleActualPos = pos;
+        else if (isInRightCircle)
+            rightCircleActualPos = pos;
+
+
+        return markerX;
+    }
+
+    public int getLeftCircleActualPos() {
+        return leftCircleActualPos;
+    }
+
+    public int getRightCircleActualPos() {
+        return rightCircleActualPos;
+    }
+
+    public void setCursorValueChangeListener(OnCursorValueChangeListener cursorInterface)
+    {
+        this.cursorInterface = new WeakReference<OnCursorValueChangeListener>(cursorInterface);
     }
 
     private class GestureListener extends GestureDetector.SimpleOnGestureListener {
