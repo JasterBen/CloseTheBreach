@@ -1,4 +1,4 @@
-package hokan.closethebreach;
+package hokan.closethebreach.activities;
 
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
+import hokan.closethebreach.R;
 import hokan.closethebreach.fragment.SliderFragment;
 
 /**

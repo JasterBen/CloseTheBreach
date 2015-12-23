@@ -1,4 +1,4 @@
-package hokan.closethebreach;
+package hokan.closethebreach.activities;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -9,6 +9,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 
+import hokan.closethebreach.R;
 import hokan.closethebreach.fragment.GameFragment;
 
 /**
@@ -38,8 +39,16 @@ public class GameActivity extends AppCompatActivity {
             Intent intent = getIntent();
             if (intent != null)
                 heroes = intent.getIntArrayExtra(HEROES);
+
             availableXp = 0;
             availableLife = 3;
+
+            GameFragment frag = new GameFragment();
+
+            FragmentManager manager = getSupportFragmentManager();
+            FragmentTransaction transaction = manager.beginTransaction();
+            transaction.replace(R.id.game_container, frag);
+            transaction.commit();
         }
         else
         {
@@ -47,14 +56,6 @@ public class GameActivity extends AppCompatActivity {
             availableXp = savedInstanceState.getInt(AVAILABLE_XP);
             availableLife = savedInstanceState.getInt(AVAILABLE_LIFE);
         }
-
-        GameFragment frag = new GameFragment();
-
-        FragmentManager manager = getSupportFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
-        transaction.replace(R.id.game_container, frag);
-        transaction.commit();
-
     }
 
     @Override

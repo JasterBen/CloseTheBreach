@@ -1,6 +1,5 @@
 package hokan.closethebreach.adapter;
 
-import android.content.Context;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,11 +8,10 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import hokan.closethebreach.GameActivity;
+import hokan.closethebreach.activities.GameActivity;
 import hokan.closethebreach.GameApplication;
 import hokan.closethebreach.R;
 import hokan.closethebreach.creatures.Hero;
-import hokan.closethebreach.fragment.TeamFragment;
 
 /**
  * Created by bmeunier on 17/11/15.

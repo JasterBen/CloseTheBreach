@@ -19,7 +19,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import hokan.closethebreach.GameActivity;
+import hokan.closethebreach.activities.GameActivity;
 import hokan.closethebreach.GameApplication;
 import hokan.closethebreach.R;
 import hokan.closethebreach.adapter.GameAdapter;
@@ -43,8 +43,8 @@ public class GameFragment extends Fragment implements AdapterView.OnItemClickLis
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_game, container, false);
 
-        if (savedInstanceState == null)
-        {
+        //if (savedInstanceState == null)
+        //{
             activity = (GameActivity) getActivity();
             Typeface font = GameApplication.getApplication().font;
 
@@ -60,7 +60,7 @@ public class GameFragment extends Fragment implements AdapterView.OnItemClickLis
             TextView life = (TextView) v.findViewById(R.id.life_number_text);
             life.setTypeface(font);
             life.setText(activity.getString(R.string.lifes) + activity.getAvailableLife());
-        }
+        //}
 
         return v;
     }
@@ -71,30 +71,35 @@ public class GameFragment extends Fragment implements AdapterView.OnItemClickLis
         DrawerLayout drawerLayout = (DrawerLayout) getActivity().findViewById(R.id.game_drawer);
         heroClicked = position;
         Hero hero = adapter.getItem(position);
-        ArrayList<Power> heroPowers = hero.getJob().getPowers();
-        int heroPowersSize = heroPowers == null ? 0 : heroPowers.size();
+        if (hero != null)
+        {
+            ArrayList<Power> heroPowers = hero.getJob().getPowers();
+            int heroPowersSize = heroPowers == null ? 0 : heroPowers.size();
 
-        Typeface font = GameApplication.getApplication().font;
+            Typeface font = GameApplication.getApplication().font;
 
-        NavigationView navigation = (NavigationView) drawerLayout.findViewById(R.id.game_navigation);
-        Menu menu = navigation.getMenu();
-        menu.clear();
-        for (int i = 0; i < heroPowersSize; i++)
-            menu.add(heroPowers.get(i).getName());
-        navigation.setNavigationItemSelectedListener(this);
+            NavigationView navigation = (NavigationView) drawerLayout.findViewById(R.id.game_navigation);
+            Menu menu = navigation.getMenu();
+            menu.clear();
+            for (Power power : heroPowers)
+                menu.add(power.getName());
 
-        ImageView image = (ImageView) navigation.findViewById(R.id.navigation_header_image);
-        image.setImageResource(hero.getImage());
+            navigation.setNavigationItemSelectedListener(this);
 
-        TextView name = (TextView) navigation.findViewById(R.id.navigation_header_name);
-        name.setTypeface(font);
-        name.setText(hero.getName());
 
-        TextView health = (TextView) navigation.findViewById(R.id.navigation_header_health);
-        health.setTypeface(font);
-        health.setText(hero.getCurrentHp() + "/" + hero.getHp());
+            ImageView image = (ImageView) navigation.findViewById(R.id.navigation_header_image);
+            image.setImageResource(hero.getImage());
 
-        drawerLayout.openDrawer(GravityCompat.START);
+            TextView name = (TextView) navigation.findViewById(R.id.navigation_header_name);
+            name.setTypeface(font);
+            name.setText(hero.getName());
+
+            TextView health = (TextView) navigation.findViewById(R.id.navigation_header_health);
+            health.setTypeface(font);
+            health.setText(hero.getCurrentHp() + "/" + hero.getHp());
+
+            drawerLayout.openDrawer(GravityCompat.START);
+        }
     }
 
     @Override
@@ -104,10 +109,8 @@ public class GameFragment extends Fragment implements AdapterView.OnItemClickLis
 
         String title = item.getTitle().toString();
         ArrayList<Power> powers = adapter.getItem(heroClicked).getJob().getPowers();
-        int size = powers == null ? 0 : powers.size();
-        int pos = 0;
-        for (; pos < size; pos++)
-            if (powers.get(pos).getName().equals(title))
+        for (Power power : powers)
+            if (power.getName().equals(title))
                 break;
 
         return false;

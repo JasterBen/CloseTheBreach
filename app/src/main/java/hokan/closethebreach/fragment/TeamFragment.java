@@ -16,7 +16,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import hokan.closethebreach.GameActivity;
+import hokan.closethebreach.activities.GameActivity;
 import hokan.closethebreach.GameApplication;
 import hokan.closethebreach.R;
 import hokan.closethebreach.adapter.TeamAdapter;
@@ -53,6 +53,7 @@ public class TeamFragment extends Fragment implements View.OnClickListener {
         adapter = new TeamAdapter(activity);
         if (savedInstanceState != null)
             adapter.setHeroesSelected(savedInstanceState.getIntArray(HEROES));
+
         grid.setAdapter(adapter);
         grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -67,6 +68,7 @@ public class TeamFragment extends Fragment implements View.OnClickListener {
                 selectedViewPosition = position;
                 if (adapter.getHero(selectedViewPosition) != -1)
                     GameApplication.getApplication().getHeroes().get(adapter.getHero(selectedViewPosition)).setEnable(true);
+
                 FragmentManager manager = getFragmentManager();
                 CharactersFragment dialog = new CharactersFragment();
                 dialog.setTargetFragment(TeamFragment.this, REQ_CODE);
@@ -107,6 +109,7 @@ public class TeamFragment extends Fragment implements View.OnClickListener {
         nameView.setText(name);
         if (!start.isClickable())
             start.setClickable(true);
+
         super.onActivityResult(requestCode, resultCode, data);
     }
 
@@ -114,6 +117,7 @@ public class TeamFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         Intent intent = new Intent(getActivity(), GameActivity.class);
         intent.putExtra(GameActivity.HEROES, adapter.getHeroesSelected());
+        getActivity().getFragmentManager().popBackStack();
         startActivity(intent);
     }
 }

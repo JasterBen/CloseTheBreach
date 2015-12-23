@@ -17,7 +17,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import hokan.closethebreach.SliderActivity;
+import hokan.closethebreach.activities.SliderActivity;
 import hokan.closethebreach.GameApplication;
 import hokan.closethebreach.R;
 import hokan.closethebreach.creatures.Hero;
